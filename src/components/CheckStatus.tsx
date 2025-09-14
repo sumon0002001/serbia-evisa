@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Upload, CheckCircle } from 'lucide-react';
+import { ArrowLeft, Upload, CheckCircle, Construction } from 'lucide-react';
 
 const ApplicationForm: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(1);
+ 
+
   const [formData, setFormData] = useState({
     // Personal Information
     firstName: '',
@@ -11,6 +13,9 @@ const ApplicationForm: React.FC = () => {
     nationality: '',
     passportNumber: '',
     passportExpiry: '',
+    applicationID: '',
+    eVisaGrantNumber: '',
+    eVisaId: '',
     
     // Contact Information
     email: '',
@@ -25,12 +30,9 @@ const ApplicationForm: React.FC = () => {
     accommodation: '',
   });
 
-  const steps = [
-    { id: 1, title: 'Personal Information', completed: false },
-    { id: 2, title: 'Travel Details', completed: false },
-    { id: 3, title: 'Documents', completed: false },
-    { id: 4, title: 'Review & Payment', completed: false },
-  ];
+
+
+
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -42,11 +44,7 @@ const ApplicationForm: React.FC = () => {
     }
   };
 
-  const firstStep = () => {
-    if (currentStep < 4) {
-      setCurrentStep(currentStep - 1);
-    }
-  };
+
 
   const prevStep = () => {
     if (currentStep === 2) {
@@ -124,6 +122,7 @@ const ApplicationForm: React.FC = () => {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   >
                     <option value="">Select nationality</option>
+                    <option value="BD">Bangladesh</option>
                     <option value="US">United States</option>
                     <option value="UK">United Kingdom</option>
                     <option value="DE">Germany</option>
@@ -144,18 +143,44 @@ const ApplicationForm: React.FC = () => {
                     placeholder="Enter passport number"
                   />
                 </div>
-                
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Passport Expiry Date *
+                    Application ID *
                   </label>
                   <input
-                    type="date"
-                    value={formData.passportExpiry}
-                    onChange={(e) => handleInputChange('passportExpiry', e.target.value)}
+                    type="text"
+                    value={formData.applicationID}
+                    onChange={(e) => handleInputChange('applicationID', e.target.value)}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Enter application number"
                   />
                 </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    E-Visa Grant Decession Number *
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.eVisaGrantNumber}
+                    onChange={(e) => handleInputChange('eVisaGrantNumber', e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Enter application number"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    E-Visa ID  *
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.eVisaId}
+                    onChange={(e) => handleInputChange('eVisaId', e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Enter application number"
+                  />
+                </div>
+                
+               
                 
               
                 
@@ -186,7 +211,9 @@ const ApplicationForm: React.FC = () => {
             </div>
           )}
 
-          {currentStep === 2 && (
+        
+
+          {currentStep === 2 &&   (
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Notification of Granting An E-Visa</h2>
               <div className="space-y-6">
@@ -197,8 +224,9 @@ const ApplicationForm: React.FC = () => {
                   <p
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   >
-                    Application ID : 65879-108795-15478
+                  Application ID : {formData.applicationID} 
                   </p>
+                
                 </div>
                 <div>
                   <h2 className="block text-sm font-medium text-gray-700 mb-2">
@@ -207,7 +235,7 @@ const ApplicationForm: React.FC = () => {
                   <p
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   >
-                    Document Number : A12462233
+                    Document Number : {formData.passportNumber}
                   </p>
                 </div>
                 <div>
@@ -217,7 +245,7 @@ const ApplicationForm: React.FC = () => {
                   <p
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   >
-                    Arif Hossain
+                  {formData.firstName} {formData.lastName}
                   </p>
                 </div><div>
                   <h2 className="block text-sm font-medium text-gray-700 mb-2">
@@ -226,7 +254,7 @@ const ApplicationForm: React.FC = () => {
                   <p
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   >
-                    POLKNBX-BQHN-OIJN-YTEHGFDVCFTE
+                    {formData.eVisaGrantNumber}
                   </p>
                 </div><div>
                   <h2 className="block text-sm font-medium text-gray-700 mb-2">
@@ -235,7 +263,7 @@ const ApplicationForm: React.FC = () => {
                   <p
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   >
-                   NBVXCFDEWO
+                   {formData.eVisaId}
                   </p>
                 </div>
                 
@@ -381,7 +409,7 @@ const ApplicationForm: React.FC = () => {
                 onClick={currentStep === 2 ? () => alert('Thank you for Visiting us!') : nextStep}
               className="bg-blue-700 hover:bg-blue-800 text-white px-8 py-3 rounded-lg font-medium"
             >
-              {currentStep === 1 ? 'Submit ' : 'Finish'}
+              {currentStep === 1   ? 'Submit ' : 'Finish'}
             </button>
           </div>
         </div>
