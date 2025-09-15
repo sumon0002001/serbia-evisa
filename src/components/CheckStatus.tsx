@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
 import { ArrowLeft, Upload, CheckCircle, Construction } from 'lucide-react';
+import ReactPDF, { PDFViewer } from '@react-pdf/renderer';
+
+
+import MyPage from './MyPage';
+
+
+
 
 const ApplicationForm: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -211,70 +218,20 @@ const ApplicationForm: React.FC = () => {
             </div>
           )}
 
-        
+
+
+        <div>
+
+  
 
           {currentStep === 2 &&   (
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Notification of Granting An E-Visa</h2>
-              <div className="space-y-6">
-                <div>
-                  <h2 className="block text-sm font-medium text-gray-700 mb-2">
-                    Application Details
-                  </h2>
-                  <p
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  >
-                  Application ID : {formData.applicationID} 
-                  </p>
-                
-                </div>
-                <div>
-                  <h2 className="block text-sm font-medium text-gray-700 mb-2">
-                    Document  Details
-                  </h2>
-                  <p
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  >
-                    Document Number : {formData.passportNumber}
-                  </p>
-                </div>
-                <div>
-                  <h2 className="block text-sm font-medium text-gray-700 mb-2">
-                    Name 
-                  </h2>
-                  <p
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  >
-                  {formData.firstName} {formData.lastName}
-                  </p>
-                </div><div>
-                  <h2 className="block text-sm font-medium text-gray-700 mb-2">
-                    E-Visa Grant Decession Number  
-                  </h2>
-                  <p
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  >
-                    {formData.eVisaGrantNumber}
-                  </p>
-                </div><div>
-                  <h2 className="block text-sm font-medium text-gray-700 mb-2">
-                    E-VISA ID
-                  </h2>
-                  <p
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  >
-                   {formData.eVisaId}
-                  </p>
-                </div>
-                
-              
-                
-               
-                
-                
-              </div>
-            </div>
+            <PDFViewer style={{width: '100%', height:'100vh'}}>
+<MyPage/>
+            </PDFViewer>
+          
+           
           )}
+                </div>
 
           {currentStep === 3 && (
             <div>
