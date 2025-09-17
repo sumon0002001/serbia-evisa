@@ -4,6 +4,7 @@ import ReactPDF, { PDFViewer } from '@react-pdf/renderer';
 
 
 import MyPage from './MyPage';
+import PdfUploader from './PdfUploader';
 
 
 
@@ -225,9 +226,7 @@ const ApplicationForm: React.FC = () => {
   
 
           {currentStep === 2 &&   (
-            <PDFViewer style={{width: '100%', height:'100vh'}}>
-<MyPage/>
-            </PDFViewer>
+            <PdfUploader/>
           
            
           )}
