@@ -1,377 +1,280 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Upload, CheckCircle, Construction } from 'lucide-react';
-import ReactPDF, { PDFViewer } from '@react-pdf/renderer';
+import { Search, AlertCircle, CheckCircle, Clock, XCircle } from 'lucide-react';
 
+interface StatusResult {
+  applicationNumber: string;
+  status: 'approved' | 'pending' | 'under-review' | 'declined';
+  submissionDate: string;
+  lastUpdated: string;
+  applicantName: string;
+  eVisaNumber?: string;
+}
 
-import MyPage from './MyPage';
-import PdfUploader from './PdfUploader';
+const StatusForm: React.FC = () => {
+  const [applicationNumber, setApplicationNumber] = useState('');
+  const [passportNumber, setPassportNumber] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [result, setResult] = useState<StatusResult | null>(null);
+  const [error, setError] = useState('');
 
-
-
-
-const ApplicationForm: React.FC = () => {
-  const [currentStep, setCurrentStep] = useState(1);
- 
-
-  const [formData, setFormData] = useState({
-    // Personal Information
-    firstName: '',
-    lastName: '',
-    dateOfBirth: '',
-    nationality: '',
-    passportNumber: '',
-    passportExpiry: '',
-    applicationID: '',
-    eVisaGrantNumber: '',
-    eVisaId: '',
-    
-    // Contact Information
-    email: '',
-    phone: '',
-    address: '',
-    
-    // Travel Information
-    visaType: 'tourist',
-    entryDate: '',
-    exitDate: '',
-    purposeOfVisit: '',
-    accommodation: '',
-  });
-
-
-
-
-
-  const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-  };
-
-  const nextStep = () => {
-    if (currentStep < 4) {
-      setCurrentStep(currentStep + 1);
+  const mockResults: { [key: string]: StatusResult } = {
+    ' 65879-108795-15478': {
+      applicationNumber: ' 65879-108795-15478',
+      status: 'approved',
+      submissionDate: '16 September 2025',
+      lastUpdated: '18 September 2024',
+      applicantName: 'Md Sagor',
+      eVisaNumber: ' NBVXCFDEWO'
+    },
+    'ETA987654321': {
+      applicationNumber: 'ETA987654321',
+      status: 'pending',
+      submissionDate: '20 March 2024',
+      lastUpdated: '20 March 2024',
+      applicantName: 'Jane Doe'
+    },
+    'ETA555666777': {
+      applicationNumber: 'ETA555666777',
+      status: 'under-review',
+      submissionDate: '10 March 2024',
+      lastUpdated: '22 March 2024',
+      applicantName: 'Michael Johnson'
     }
   };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setResult(null);
+    
+    if (!applicationNumber || !passportNumber || !dateOfBirth) {
+      setError('Please fill in all required fields.');
+      return;
+    }
 
+    setIsLoading(true);
+    
+    // Simulate API call
+    setTimeout(() => {
+      const mockResult = mockResults[applicationNumber.toUpperCase()];
+      
+      if (mockResult) {
+        setResult(mockResult);
+      } else {
+        setError('No application found with the provided details. Please check your information and try again.');
+      }
+      
+      setIsLoading(false);
+    }, 2000);
+  };
 
-  const prevStep = () => {
-    if (currentStep === 2) {
-      setCurrentStep(currentStep - 1);
+  const getStatusIcon = (status: string) => {
+    switch (status) {
+      case 'approved':
+        return <CheckCircle className="w-6 h-6 text-green-600" />;
+      case 'pending':
+        return <Clock className="w-6 h-6 text-yellow-600" />;
+      case 'under-review':
+        return <AlertCircle className="w-6 h-6 text-blue-600" />;
+      case 'declined':
+        return <XCircle className="w-6 h-6 text-red-600" />;
+      default:
+        return <Clock className="w-6 h-6 text-gray-600" />;
+    }
+  };
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'approved':
+        return 'text-green-600';
+      case 'pending':
+        return 'text-yellow-600';
+      case 'under-review':
+        return 'text-blue-600';
+      case 'declined':
+        return 'text-red-600';
+      default:
+        return 'text-gray-600';
+    }
+  };
+
+  const getStatusText = (status: string) => {
+    switch (status) {
+      case 'approved':
+        return 'Approved';
+      case 'pending':
+        return 'Pending Review';
+      case 'under-review':
+        return 'Under Review';
+      case 'declined':
+        return 'Declined';
+      default:
+        return 'Unknown';
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="mb-8">
-          <button className="flex items-center text-blue-700 hover:text-blue-800 mb-4">
-            <ArrowLeft className="w-5 h-5 mr-2" />
-            Back to Home
-          </button>
-          <h1 className="text-3xl font-bold text-gray-900">eVisa Application</h1>
-          <p className="text-gray-600 mt-2">Complete your visa application in a few simple steps</p>
+    <div className="max-w-2xl mx-auto">
+      <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6 mb-6">
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">Check Your Application Status</h2>
+        
+        <div className="space-y-4">
+          <div>
+            <label htmlFor="applicationNumber" className="block text-sm font-medium text-gray-700 mb-2">
+              Application Number *
+            </label>
+            <input
+              type="text"
+              id="applicationNumber"
+              value={applicationNumber}
+              onChange={(e) => setApplicationNumber(e.target.value)}
+              placeholder="e.g., 123-456-789"
+              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="passportNumber" className="block text-sm font-medium text-gray-700 mb-2">
+              Passport Number *
+            </label>
+            <input
+              type="text"
+              id="passportNumber"
+              value={passportNumber}
+              onChange={(e) => setPassportNumber(e.target.value)}
+              placeholder="Enter your passport number"
+              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700 mb-2">
+              Date of Birth *
+            </label>
+            <input
+              type="date"
+              id="dateOfBirth"
+              value={dateOfBirth}
+              onChange={(e) => setDateOfBirth(e.target.value)}
+              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+            />
+          </div>
         </div>
 
-        {/* Progress Steps */}
-       
-
-        {/* Form Content */}
-        <div className="bg-white rounded-xl shadow-lg p-8">
-          {currentStep === 1 && (
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Personal Information</h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    First Name *
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.firstName}
-                    onChange={(e) => handleInputChange('firstName', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Enter your first name"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Last Name *
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.lastName}
-                    onChange={(e) => handleInputChange('lastName', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Enter your last name"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Date of Birth *
-                  </label>
-                  <input
-                    type="date"
-                    value={formData.dateOfBirth}
-                    onChange={(e) => handleInputChange('dateOfBirth', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Nationality *
-                  </label>
-                  <select
-                    value={formData.nationality}
-                    onChange={(e) => handleInputChange('nationality', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  >
-                    <option value="">Select nationality</option>
-                    <option value="BD">Bangladesh</option>
-                    <option value="US">United States</option>
-                    <option value="UK">United Kingdom</option>
-                    <option value="DE">Germany</option>
-                    <option value="FR">France</option>
-                    <option value="IT">Italy</option>
-                  </select>
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Passport Number *
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.passportNumber}
-                    onChange={(e) => handleInputChange('passportNumber', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Enter passport number"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Application ID *
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.applicationID}
-                    onChange={(e) => handleInputChange('applicationID', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Enter application number"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    E-Visa Grant Decession Number *
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.eVisaGrantNumber}
-                    onChange={(e) => handleInputChange('eVisaGrantNumber', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Enter application number"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    E-Visa ID  *
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.eVisaId}
-                    onChange={(e) => handleInputChange('eVisaId', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Enter application number"
-                  />
-                </div>
-                
-               
-                
-              
-                
-                 <div className="space-y-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Visa Type *
-                  </label>
-                  <select
-                    value={formData.visaType}
-                    onChange={(e) => handleInputChange('visaType', e.target.value)}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  >
-                    <option value="tourist">Tourist Visa </option>
-                    <option value="business">Business Visa </option>
-                    <option value="transit">Transit Visa </option>
-                    <option value="multiple">Multiple Entry Visa </option>
-                  </select>
-                </div>
-                
-               
-                
-              
-                
-               
-              </div>
-              </div>
+        {error && (
+          <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-md">
+            <div className="flex items-center">
+              <AlertCircle className="w-5 h-5 text-red-600 mr-2" />
+              <p className="text-red-700">{error}</p>
             </div>
+          </div>
+        )}
+
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="w-full mt-6 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium py-3 px-6 rounded-md transition-colors flex items-center justify-center"
+        >
+          {isLoading ? (
+            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+          ) : (
+            <Search className="w-5 h-5 mr-2" />
           )}
+          {isLoading ? 'Checking...' : 'Check Status'}
+        </button>
 
+        <p className="text-sm text-gray-600 mt-4">
+          * Required fields. try application number: 123-456-789, 987-654-321, or 555-666-777
+        </p>
+      </form>
 
-
-        <div>
-
-  
-
-          {currentStep === 2 &&   (
-            <PdfUploader/>
+      {result && (
+        <div className="bg-white rounded-lg shadow-md p-6">
+          <h3 className="text-xl font-bold text-gray-900 mb-4">Application Status</h3>
           
-           
-          )}
-                </div>
-
-          {currentStep === 3 && (
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Upload Documents</h2>
-              
-              <div className="space-y-6">
-                <div className="bg-blue-50 p-4 rounded-lg">
-                  <h3 className="font-semibold text-blue-900 mb-2">Required Documents:</h3>
-                  <ul className="text-sm text-blue-800 space-y-1">
-                    <li>• Passport copy (photo page)</li>
-                    <li>• Recent passport-style photograph</li>
-                    <li>• Travel itinerary or flight reservation</li>
-                    <li>• Accommodation proof</li>
-                    <li>• Travel insurance certificate</li>
-                  </ul>
-                </div>
-
-                <div className="grid gap-6">
-                  {['Passport Copy', 'Photograph', 'Flight Reservation', 'Accommodation Proof', 'Travel Insurance'].map((doc) => (
-                    <div key={doc} className="border-2 border-dashed border-gray-300 rounded-lg p-6 hover:border-blue-500 transition-colors">
-                      <div className="text-center">
-                        <Upload className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-                        <h3 className="font-medium text-gray-900 mb-2">{doc}</h3>
-                        <p className="text-sm text-gray-600 mb-4">
-                          Drag and drop your file here, or click to browse
-                        </p>
-                        <button className="bg-blue-700 text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition-colors">
-                          Choose File
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+          <div className="border rounded-lg p-4 mb-4">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center">
+                {getStatusIcon(result.status)}
+                <span className={`ml-2 font-semibold text-lg ${getStatusColor(result.status)}`}>
+                  {getStatusText(result.status)}
+                </span>
               </div>
             </div>
-          )}
 
-          {currentStep === 4 && (
-            <div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Review & Payment</h2>
-              
-              <div className="space-y-8">
-                <div className="bg-gray-50 p-6 rounded-lg">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Application Summary</h3>
-                  <div className="grid md:grid-cols-2 gap-4 text-sm">
-                    <div>
-                      <span className="text-gray-600">Name:</span>
-                      <span className="ml-2 font-medium">{formData.firstName} {formData.lastName}</span>
-                    </div>
-                    <div>
-                      <span className="text-gray-600">Nationality:</span>
-                      <span className="ml-2 font-medium">{formData.nationality}</span>
-                    </div>
-                    <div>
-                      <span className="text-gray-600">Visa Type:</span>
-                      <span className="ml-2 font-medium capitalize">{formData.visaType}</span>
-                    </div>
-                    <div>
-                      <span className="text-gray-600">Travel Period:</span>
-                      <span className="ml-2 font-medium">{formData.entryDate} to {formData.exitDate}</span>
-                    </div>
-                  </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+              <div>
+                <p className="text-gray-600">Application Number</p>
+                <p className="font-medium">{result.applicationNumber}</p>
+              </div>
+              <div>
+                <p className="text-gray-600">Applicant Name</p>
+                <p className="font-medium">{result.applicantName}</p>
+              </div>
+              <div>
+                <p className="text-gray-600">Submission Date</p>
+                <p className="font-medium">{result.submissionDate}</p>
+              </div>
+              <div>
+                <p className="text-gray-600">Last Updated</p>
+                <p className="font-medium">{result.lastUpdated}</p>
+              </div>
+              {result.eVisaNumber && (
+                <div className="md:col-span-2">
+                  <p className="text-gray-600">e-Visa Number</p>
+                  <p className="font-medium text-green-600">{result.eVisaNumber}</p>
                 </div>
+              )}
+            </div>
+          </div>
 
-                <div className="bg-blue-50 p-6 rounded-lg">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Payment Details</h3>
-                  <div className="flex justify-between items-center text-lg">
-                    <span>Visa Fee ({formData.visaType}):</span>
-                    <span className="font-bold text-blue-700">
-                      {formData.visaType === 'tourist' ? '€25' : 
-                       formData.visaType === 'business' ? '€60' :
-                       formData.visaType === 'transit' ? '€25' : '€105'}
-                    </span>
-                  </div>
-                </div>
-
+          {result.status === 'approved' && (
+            <div className="bg-green-50 border border-green-200 rounded-md p-4">
+              <div className="flex items-start">
+                <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 mr-2 flex-shrink-0" />
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Payment Method</h3>
-                  <div className="space-y-4">
-                    <div className="border-2 border-blue-700 bg-blue-50 p-4 rounded-lg">
-                      <label className="flex items-center">
-                        <input type="radio" name="payment" defaultChecked className="mr-3" />
-                        <span className="font-medium">Credit/Debit Card</span>
-                      </label>
-                    </div>
-                    
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <input
-                        type="text"
-                        placeholder="Card Number"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg"
-                      />
-                      <input
-                        type="text"
-                        placeholder="MM/YY"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg"
-                      />
-                    </div>
-                    <input
-                      type="text"
-                      placeholder="CVV"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg"
-                    />
-                  </div>
-                </div>
-
-                <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-lg">
-                  <p className="text-sm text-yellow-800">
-                    By proceeding with payment, you confirm that all information provided is accurate 
-                    and you agree to the terms and conditions of the eVisa service.
+                  <h4 className="font-medium text-green-800">Your e-Visa has been approved!</h4>
+                  <p className="text-green-700 mt-1 text-sm">
+                    Your Serbia Travel Visa is now valid for travel. 
+                    Save your e-Visa number for your records.
                   </p>
                 </div>
               </div>
             </div>
           )}
 
-          {/* Navigation Buttons */}
-          <div className="flex justify-between mt-12 pt-8 border-t border-gray-200">
-            <button
-              onClick={prevStep}
-              disabled={currentStep === 1}
-              className={`px-6 py-3 rounded-lg font-medium ${
-                currentStep === 1
-                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
-            >
-              Previous
-            </button>
-            
-            <button
-                onClick={currentStep === 2 ? () => alert('Thank you for Visiting us!') : nextStep}
-              className="bg-blue-700 hover:bg-blue-800 text-white px-8 py-3 rounded-lg font-medium"
-            >
-              {currentStep === 1   ? 'Submit ' : 'Finish'}
-            </button>
-          </div>
+          {result.status === 'pending' && (
+            <div className="bg-yellow-50 border border-yellow-200 rounded-md p-4">
+              <div className="flex items-start">
+                <Clock className="w-5 h-5 text-yellow-600 mt-0.5 mr-2 flex-shrink-0" />
+                <div>
+                  <h4 className="font-medium text-yellow-800">Your application is being processed</h4>
+                  <p className="text-yellow-700 mt-1 text-sm">
+                    We are currently reviewing your application. You will be notified once a decision has been made.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {result.status === 'under-review' && (
+            <div className="bg-blue-50 border border-blue-200 rounded-md p-4">
+              <div className="flex items-start">
+                <AlertCircle className="w-5 h-5 text-blue-600 mt-0.5 mr-2 flex-shrink-0" />
+                <div>
+                  <h4 className="font-medium text-blue-800">Additional review required</h4>
+                  <p className="text-blue-700 mt-1 text-sm">
+                    Your application requires additional review. This may take longer than usual processing times.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
-      </div>
+      )}
     </div>
   );
 };
 
-export default ApplicationForm;
+export default StatusForm;
