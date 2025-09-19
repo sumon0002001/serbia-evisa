@@ -8,10 +8,16 @@ interface StatusResult {
   lastUpdated: string;
   applicantName: string;
   eVisaNumber?: string;
+  eVisaGrantNumber?: string;
+  numberOfEntries?: string;
+  nationality: string;
 }
 
 const StatusForm: React.FC = () => {
   const [applicationNumber, setApplicationNumber] = useState('');
+  const [eVisaGrantNumber, setEVisaGrantNumber] = useState('');
+  const [name, setName] = useState('');
+  const [nationality, setNationality] = useState('');
   const [passportNumber, setPassportNumber] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -25,21 +31,26 @@ const StatusForm: React.FC = () => {
       submissionDate: '16 September 2025',
       lastUpdated: '19 September 2025',
       applicantName: 'Md Sagor',
-      eVisaNumber: ' NBVXCFDEWO'
+      eVisaNumber: ' NBVXCFDEWO',
+      eVisaGrantNumber:' POLKNBX-BQHN-OIJN-YTEHGFDVCFTE',
+      numberOfEntries: 'multiple',
+      nationality: 'Bangladeshi'
     },
     'ETA987654321': {
       applicationNumber: 'ETA987654321',
       status: 'pending',
       submissionDate: '20 March 2024',
       lastUpdated: '20 March 2024',
-      applicantName: 'Jane Doe'
+      applicantName: 'Jane Doe',
+      nationality: 'Bangladeshi'
     },
     'ETA555666777': {
       applicationNumber: 'ETA555666777',
       status: 'under-review',
       submissionDate: '10 March 2024',
       lastUpdated: '22 March 2024',
-      applicantName: 'Michael Johnson'
+      applicantName: 'Michael Johnson',
+      nationality: 'Bangladeshi',
     }
   };
 
@@ -133,7 +144,45 @@ const StatusForm: React.FC = () => {
               className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
             />
           </div>
-
+            <div>
+            <label htmlFor="applicationNumber" className="block text-sm font-medium text-gray-700 mb-2">
+               E-visa Grant Decision Number *
+            </label>
+            <input
+              type="text"
+              id="eVisaGrantNumber"
+              value={eVisaGrantNumber}
+              onChange={(e) => setEVisaGrantNumber(e.target.value)}
+              placeholder="e.g., HSDK-DGDG-HHDC"
+              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+            />
+          </div>
+ <div>
+            <label htmlFor="applicationNumber" className="block text-sm font-medium text-gray-700 mb-2">
+             Applicant Name *
+            </label>
+            <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder=""
+              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+            />
+          </div>
+           <div>
+            <label htmlFor="applicationNumber" className="block text-sm font-medium text-gray-700 mb-2">
+              Nationality *
+            </label>
+            <input
+              type="text"
+              id="nationality"
+              value={nationality}
+              onChange={(e) => setNationality(e.target.value)}
+              placeholder=""
+              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+            />
+          </div>
           <div>
             <label htmlFor="passportNumber" className="block text-sm font-medium text-gray-700 mb-2">
               Passport Number *
@@ -220,10 +269,27 @@ const StatusForm: React.FC = () => {
                 <p className="text-gray-600">Last Updated</p>
                 <p className="font-medium">{result.lastUpdated}</p>
               </div>
+                <div>
+                <p className="text-gray-600">Nationality</p>
+                <p className="font-medium">{result.nationality}</p>
+              </div>
+
+              {result.eVisaGrantNumber && (
+                <div className="md:col-span-2">
+                  <p className="text-gray-600">e-Visa Grant Number</p>
+                  <p className="font-medium text-green-600">{result.eVisaGrantNumber}</p>
+                </div>
+              )}
               {result.eVisaNumber && (
                 <div className="md:col-span-2">
                   <p className="text-gray-600">e-Visa Number</p>
                   <p className="font-medium text-green-600">{result.eVisaNumber}</p>
+                </div>
+              )}
+     {result.numberOfEntries && (
+                <div className="md:col-span-2">
+                  <p className="text-gray-600">Number of Entries</p>
+                  <p className="font-medium text-green-600">{result.numberOfEntries}</p>
                 </div>
               )}
             </div>
