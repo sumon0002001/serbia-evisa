@@ -50,8 +50,8 @@ const StatusForm: React.FC = () => {
     '65879-108795-15448': {
       applicationNumber: '65879-108795-15448',
       status: 'approved',
-      submissionDate: '16 September 2025',
-      lastUpdated: '19 September 2025',
+      submissionDate: '18 September 2025',
+      lastUpdated: '20 September 2025',
       applicantName: 'JUBER AHMED',
       eVisaNumber: 'NBVXCFQRMA',
       eVisaGrantNumber:'POLKNBX-BQHN-OIJN-YTEHGFERTNCF',
