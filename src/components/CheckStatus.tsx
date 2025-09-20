@@ -5,7 +5,7 @@ interface StatusResult {
   applicationNumber: string;
   status: 'approved' | 'pending' | 'under-review' | 'declined';
   submissionDate: string;
-  lastUpdated: string;
+  issuedDate: string;
   applicantName: string;
   eVisaNumber?: string;
   eVisaGrantNumber?: string;
@@ -29,7 +29,7 @@ const StatusForm: React.FC = () => {
       applicationNumber: '65879-108795-15478',
       status: 'approved',
       submissionDate: '16 September 2025',
-      lastUpdated: '19 September 2025',
+      issuedDate: '19 September 2025',
       applicantName: 'Md Sagor',
       eVisaNumber: 'NBVXCFDEWO',
       eVisaGrantNumber:'POLKNBX-BQHN-OIJN-YTEHGFDVCFTE',
@@ -40,7 +40,7 @@ const StatusForm: React.FC = () => {
       applicationNumber: '65879-108795-15410',
       status: 'approved',
       submissionDate: '16 September 2025',
-      lastUpdated: '19 September 2025',
+      issuedDate: '19 September 2025',
       applicantName: 'AKTARUJJAMAN NAYEEM',
       eVisaNumber: 'NBVXCFQPLF',
       eVisaGrantNumber:'POLKNBX-BQHN-OIJN-YTEHGFQPMZHQ',
@@ -51,7 +51,7 @@ const StatusForm: React.FC = () => {
       applicationNumber: '65879-108795-15448',
       status: 'approved',
       submissionDate: '18 September 2025',
-      lastUpdated: '20 September 2025',
+      issuedDate: '20 September 2025',
       applicantName: 'JUBER AHMED',
       eVisaNumber: 'NBVXCFQRMA',
       eVisaGrantNumber:'POLKNBX-BQHN-OIJN-YTEHGFERTNCF',
@@ -62,7 +62,7 @@ const StatusForm: React.FC = () => {
       applicationNumber: '65879-108795-15452',
       status: 'approved',
       submissionDate: '16 September 2025',
-      lastUpdated: '19 September 2025',
+      issuedDate: '19 September 2025',
       applicantName: 'MOHAMMED RAHI AHMED',
       eVisaNumber: ' NBVXCFPLMH',
       eVisaGrantNumber:'POLKNBX-BQHN-OIJN-QALMVFTYAKFP',
@@ -73,7 +73,7 @@ const StatusForm: React.FC = () => {
       applicationNumber: '65879-108795-15495',
       status: 'approved',
       submissionDate: '16 September 2025',
-      lastUpdated: '19 September 2025',
+      issuedDate: '19 September 2025',
       applicantName: 'MD ABDUR RAHAMAN',
       eVisaNumber: 'MNASLKRPZR',
       eVisaGrantNumber:'POLKNBX-BQHN-OIJN-YTEHGFERMDYW',
@@ -84,7 +84,7 @@ const StatusForm: React.FC = () => {
       applicationNumber: 'ETA987654321',
       status: 'pending',
       submissionDate: '20 March 2024',
-      lastUpdated: '20 March 2024',
+      issuedDate: '20 March 2024',
       applicantName: 'Jane Doe',
       nationality: 'Bangladeshi'
     },
@@ -92,7 +92,7 @@ const StatusForm: React.FC = () => {
       applicationNumber: 'ETA555666777',
       status: 'under-review',
       submissionDate: '10 March 2024',
-      lastUpdated: '22 March 2024',
+      issuedDate: '22 March 2024',
       applicantName: 'Michael Johnson',
       nationality: 'Bangladeshi',
     }
@@ -310,8 +310,8 @@ const StatusForm: React.FC = () => {
                 <p className="font-medium">{result.submissionDate}</p>
               </div>
               <div>
-                <p className="text-gray-600">Last Updated</p>
-                <p className="font-medium">{result.lastUpdated}</p>
+                <p className="text-gray-600">Issue Date</p>
+                <p className="font-medium">{result.issuedDate}</p>
               </div>
                 <div>
                 <p className="text-gray-600">Nationality</p>
