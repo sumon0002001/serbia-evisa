@@ -92,8 +92,8 @@ const StatusForm: React.FC = () => {
       numberOfEntries: 'multiple',
       nationality: 'Bangladeshi'
     },
-    '65879-108795-15495': {
-      applicationNumber: '65879-108795-15495',
+    '65879-108795-': {
+      applicationNumber: '65879-108795-',
       status: 'approved',
       submissionDate: '16 September 2025',
       issuedDate: '19 September 2025',
