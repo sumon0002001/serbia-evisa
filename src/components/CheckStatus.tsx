@@ -36,8 +36,8 @@ const StatusForm: React.FC = () => {
       numberOfEntries: 'multiple',
       nationality: 'Bangladeshi'
     },
-    '65879-108795-15468': {
-      applicationNumber: '65879-108795-15468',
+    '65879-108795-': {
+      applicationNumber: '65879-108795-',
       status: 'approved',
       submissionDate: '16 September 2025',
       issuedDate: '19 September 2025',
@@ -47,8 +47,8 @@ const StatusForm: React.FC = () => {
       numberOfEntries: 'multiple',
       nationality: 'Bangladeshi'
     },
-     '65879-108795-15415': {
-      applicationNumber: '65879-108795-15415',
+     '65879-108795': {
+      applicationNumber: '65879-108795-',
       status: 'approved',
       submissionDate: '16 September 2025',
       issuedDate: '19 September 2025',
@@ -59,7 +59,7 @@ const StatusForm: React.FC = () => {
       nationality: 'Bangladeshi'
     },
     
-    '65879-108795-15410': {
+    '65879-108795-15': {
       applicationNumber: '65879-108795-15410',
       status: 'approved',
       submissionDate: '16 September 2025',
@@ -70,7 +70,7 @@ const StatusForm: React.FC = () => {
       numberOfEntries: 'multiple',
       nationality: 'Bangladeshi'
     },
-    '65879-108795-15448': {
+    '65879-108': {
       applicationNumber: '65879-108795-15448',
       status: 'approved',
       submissionDate: '18 September 2025',
@@ -81,7 +81,7 @@ const StatusForm: React.FC = () => {
       numberOfEntries: 'multiple',
       nationality: 'Bangladeshi'
     },
-    '65879-108795-15452': {
+    '65879-10': {
       applicationNumber: '65879-108795-15452',
       status: 'approved',
       submissionDate: '16 September 2025',
@@ -92,7 +92,7 @@ const StatusForm: React.FC = () => {
       numberOfEntries: 'multiple',
       nationality: 'Bangladeshi'
     },
-    '65879-108795-': {
+    '65879': {
       applicationNumber: '65879-108795-',
       status: 'approved',
       submissionDate: '16 September 2025',
