@@ -30,7 +30,7 @@ const StatusForm: React.FC = () => {
       status: 'approved',
       submissionDate: '16 September 2025',
       issuedDate: '19 September 2025',
-      applicantName: 'Md',
+      applicantName: 'Md Sagor',
       eVisaNumber: 'NBVXCFDEWO',
       eVisaGrantNumber:'POLKNBX-BQHN-OIJN-YTEHGFDVCFTE',
       numberOfEntries: 'multiple',
