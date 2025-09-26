@@ -329,7 +329,7 @@ const StatusForm: React.FC = () => {
                 <p className="font-medium">{result.applicantName}</p>
               </div>
               <div>
-                <p className="text-gray-600">Submission Date</p>
+                <p className="text-gray-600">Expiry Date</p>
                 <p className="font-medium">{result.expiryDate}</p>
               </div>
               <div>
