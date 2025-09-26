@@ -4,7 +4,7 @@ import { Search, AlertCircle, CheckCircle, Clock, XCircle } from 'lucide-react';
 interface StatusResult {
   applicationNumber: string;
   status: 'approved' | 'pending' | 'under-review' | 'declined';
-  submissionDate: string;
+  expiryDate: string;
   issuedDate: string;
   applicantName: string;
   eVisaNumber?: string;
@@ -28,7 +28,7 @@ const StatusForm: React.FC = () => {
     '15379-108795-48315': {
       applicationNumber: '15379-108795-48315',
       status: 'approved',
-      submissionDate: '26 September 2025',
+      expiryDate: '25 March 2026',
       issuedDate: '26 September 2025',
       applicantName: 'SAIDUL ISLAM SHAKIL',
       eVisaNumber: 'PFJEMLTAPQO',
@@ -39,7 +39,7 @@ const StatusForm: React.FC = () => {
     '65879-108795-': {
       applicationNumber: '65879-108795-',
       status: 'approved',
-      submissionDate: '16 September 2025',
+      expiryDate: '16 September 2025',
       issuedDate: '19 September 2025',
       applicantName: ' MD AZHARUL ISLAM',
       eVisaNumber: 'NBVXCFSPRZ',
@@ -50,7 +50,7 @@ const StatusForm: React.FC = () => {
      '15379-108795-01837': {
       applicationNumber: '15379-108795-01837',
       status: 'approved',
-      submissionDate: '26 September 2025',
+      expiryDate: '25 March 2026',
       issuedDate: '26 September 2025',
       applicantName: ' MD OAHIDUL MOLLAH',
       eVisaNumber: 'KDLTFKJGEA',
@@ -62,7 +62,7 @@ const StatusForm: React.FC = () => {
     '15379-108795-57935': {
       applicationNumber: '15379-108795-57935',
       status: 'approved',
-      submissionDate: '26 September 2025',
+      expiryDate: '25 March 2026',
       issuedDate: '26 September 2025',
       applicantName: 'MD ABDULLAH AL MAMUN',
       eVisaNumber: 'ROFLDRTKTP',
@@ -73,7 +73,7 @@ const StatusForm: React.FC = () => {
     '15379-108795-56348': {
       applicationNumber: '15379-108795-56348',
       status: 'approved',
-      submissionDate: '26 September 2025',
+      expiryDate: '25 March 2026',
       issuedDate: '26 September 2025',
       applicantName: 'MUNNA HUSSIN',
       eVisaNumber: 'KDLTFKXFTS',
@@ -84,7 +84,7 @@ const StatusForm: React.FC = () => {
     '65879-10': {
       applicationNumber: '65879-108795-15452',
       status: 'approved',
-      submissionDate: '16 September 2025',
+      expiryDate: '16 September 2026',
       issuedDate: '19 September 2025',
       applicantName: 'MOHAMMED RAHI AHMED',
       eVisaNumber: ' NBVXCFPLMH',
@@ -95,7 +95,7 @@ const StatusForm: React.FC = () => {
     '65879': {
       applicationNumber: '65879-108795-',
       status: 'approved',
-      submissionDate: '16 September 2025',
+      expiryDate: '16 September 2025',
       issuedDate: '19 September 2025',
       applicantName: 'MD ABDUR RAHAMAN',
       eVisaNumber: 'MNASLKRPZR',
@@ -106,7 +106,7 @@ const StatusForm: React.FC = () => {
     'ETA987654321': {
       applicationNumber: 'ETA987654321',
       status: 'pending',
-      submissionDate: '20 March 2024',
+      expiryDate: '20 March 2024',
       issuedDate: '20 March 2024',
       applicantName: 'Jane Doe',
       nationality: 'Bangladeshi'
@@ -114,7 +114,7 @@ const StatusForm: React.FC = () => {
     'ETA555666777': {
       applicationNumber: 'ETA555666777',
       status: 'under-review',
-      submissionDate: '10 March 2024',
+      expiryDate: '10 March 2024',
       issuedDate: '22 March 2024',
       applicantName: 'Michael Johnson',
       nationality: 'Bangladeshi',
@@ -330,7 +330,7 @@ const StatusForm: React.FC = () => {
               </div>
               <div>
                 <p className="text-gray-600">Submission Date</p>
-                <p className="font-medium">{result.submissionDate}</p>
+                <p className="font-medium">{result.expiryDate}</p>
               </div>
               <div>
                 <p className="text-gray-600">Issue Date</p>
