@@ -25,7 +25,7 @@ const StatusForm: React.FC = () => {
   const [error, setError] = useState('');
 
   const mockResults: { [key: string]: StatusResult } = {
-    '15379-108795-48315': {
+    '15379-108795-48': {
       applicationNumber: '15379-108795-48315',
       status: 'approved',
       expiryDate: '25 March 2026',
@@ -47,7 +47,7 @@ const StatusForm: React.FC = () => {
       numberOfEntries: 'multiple',
       nationality: 'Bangladeshi'
     },
-     '15379-108795-01837': {
+     '15379-108795-018': {
       applicationNumber: '15379-108795-01837',
       status: 'approved',
       expiryDate: '25 March 2026',
@@ -59,7 +59,7 @@ const StatusForm: React.FC = () => {
       nationality: 'Bangladeshi'
     },
     
-    '15379-108795-57935': {
+    '15379-108795-579': {
       applicationNumber: '15379-108795-57935',
       status: 'approved',
       expiryDate: '25 March 2026',
@@ -70,7 +70,7 @@ const StatusForm: React.FC = () => {
       numberOfEntries: 'multiple',
       nationality: 'Bangladeshi'
     },
-    '15379-108795-56348': {
+    '15379-10': {
       applicationNumber: '15379-108795-56348',
       status: 'approved',
       expiryDate: '25 March 2026',
