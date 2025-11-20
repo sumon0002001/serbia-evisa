@@ -25,14 +25,14 @@ const StatusForm: React.FC = () => {
   const [error, setError] = useState('');
 
   const mockResults: { [key: string]: StatusResult } = {
-    '15379-108795-48315': {
-      applicationNumber: '15379-108795-48315',
+    '65879-108795-15478': {
+      applicationNumber: '65879-108795-15478',
       status: 'approved',
-      expiryDate: '29 March 2026',
-      issuedDate: '30 September 2025',
-      applicantName: 'LOBLO KUMAR SHIL',
-      eVisaNumber: 'PFJEMLTAPQO',
-      eVisaGrantNumber:' POLKNBX-BQHN-OIJN-YTHRPDRLADQS',
+      expiryDate: '17 February 2026',
+      issuedDate: '19 November 2025',
+      applicantName: 'LITON DAS',
+      eVisaNumber: 'NBVXCFDEWO',
+      eVisaGrantNumber:'POLKNBX-BQHN-OIJN-YTEHGFDVCFTE',
       numberOfEntries: 'multiple',
       nationality: 'Bangladeshi'
     },
