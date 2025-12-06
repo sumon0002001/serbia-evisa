@@ -28,13 +28,13 @@ const StatusForm: React.FC = () => {
     '65879-108795-15478': {
       applicationNumber: '65879-108795-15478',
       status: 'approved',
-      expiryDate: '17 February 2026',
-      issuedDate: '19 November 2025',
-      applicantName: 'LITON DAS',
+      expiryDate: '05 March 2026',
+      issuedDate: '06 December 2025',
+      applicantName: 'Rukhsar Ahmed',
       eVisaNumber: 'NBVXCFDEWO',
       eVisaGrantNumber:'POLKNBX-BQHN-OIJN-YTEHGFDVCFTE',
       numberOfEntries: 'multiple',
-      nationality: 'Bangladeshi'
+      nationality: 'Pakistani'
     },
     '65879-108795-': {
       applicationNumber: '65879-108795-',
