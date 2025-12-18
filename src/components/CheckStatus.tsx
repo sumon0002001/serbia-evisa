@@ -40,7 +40,7 @@ const StatusForm: React.FC = () => {
       applicationNumber: '65879-108795-15543',
       status: 'approved',
       expiryDate: '15 June 2026',
-      issuedDate: '17 December 2025',
+      issuedDate: '18 December 2025',
       applicantName: 'ABDUL BASIT',
       eVisaNumber: 'NBVXCFSPRZ',
       eVisaGrantNumber:'POLKNBX-BQHN-OIJN-YKDSKLWYCNAP',
