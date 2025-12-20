@@ -25,7 +25,7 @@ const StatusForm: React.FC = () => {
   const [error, setError] = useState('');
 
   const mockResults: { [key: string]: StatusResult } = {
-    '65879-108795-15478': {
+    '65879-': {
       applicationNumber: '65879-108795-15478',
       status: 'approved',
       expiryDate: '05 March 2026',
@@ -36,7 +36,7 @@ const StatusForm: React.FC = () => {
       numberOfEntries: 'multiple',
       nationality: 'Pakistani'
     },
-    '65879-108795-15543': {
+    '65879-': {
       applicationNumber: '65879-108795-15543',
       status: 'approved',
       expiryDate: '15 June 2026',
