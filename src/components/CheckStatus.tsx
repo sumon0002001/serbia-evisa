@@ -25,8 +25,8 @@ const StatusForm: React.FC = () => {
   const [error, setError] = useState('');
 
   const mockResults: { [key: string]: StatusResult } = {
-    '434649-941611-73924': {
-      applicationNumber: '434649-941611-73924',
+    '434649-9484848484': {
+      applicationNumber: '434649-941611-7',
       status: 'approved',
       expiryDate: '11 April 2026',
       issuedDate: '12 March 2026',
@@ -59,8 +59,8 @@ const StatusForm: React.FC = () => {
       nationality: 'Pakistani'
     },
     
-    '15379-108795-57935': {
-      applicationNumber: '15379-108795-57935',
+    '15379-': {
+      applicationNumber: '15379-10',
       status: 'approved',
       expiryDate: '11 April 2026',
       issuedDate: '12 March 2026',
@@ -81,23 +81,23 @@ const StatusForm: React.FC = () => {
       numberOfEntries: 'multiple',
       nationality: 'Bangladeshi'
     },
-    '65879-108795-15452': {
-      applicationNumber: '65879-108795-15452',
+    '658': {
+      applicationNumber: '65879-108',
       status: 'approved',
       expiryDate: '11 April 2026',
       issuedDate: '12 March 2026',
-      applicantName: 'MUHAMMAD UMAR RANA',
+      applicantName: '',
       eVisaNumber: 'LFWO87DVPT',
       eVisaGrantNumber:'G7N403Z-2JX5-8MRY-6TP1-JDAI56BFLQO',
       numberOfEntries: 'Single',
       nationality: 'Pakistani'
     },
-    '434649-941611-79945': {
-      applicationNumber: '434649-941611-79945',
+    '4': {
+      applicationNumber: '4',
       status: 'approved',
       expiryDate: '14 April 2026',
       issuedDate: '15 March 2026',
-      applicantName: 'MUHAMMAD TAYYAB HAMEED',
+      applicantName: '',
       eVisaNumber: 'UFLOWDVJTE',
       eVisaGrantNumber:'G7N403Z-2JX5-8MRY-6TP1-387FKLFWO0T',
       numberOfEntries: 'single',
